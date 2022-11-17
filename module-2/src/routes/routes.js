@@ -16,6 +16,11 @@ const routes = [
     method: "GET",
     handler: UserService.getOne,
   },
+  {
+    endpoint: "/users/:id",
+    method: "PUT",
+    handler: UserService.put,
+  },
 ];
 
 export default routes;

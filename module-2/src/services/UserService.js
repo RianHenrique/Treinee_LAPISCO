@@ -37,6 +37,11 @@ class UserService {
       return res.end();
     }
   }
+
+  put(req, res) {
+    const usuario = req.getAll();
+    console.log("Testando: ", usuario);
+  }
 }
 
 export default new UserService();
