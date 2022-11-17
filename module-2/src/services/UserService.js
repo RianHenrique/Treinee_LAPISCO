@@ -39,8 +39,23 @@ class UserService {
   }
 
   put(req, res) {
-    const usuario = req.getAll();
-    console.log("Testando: ", usuario);
+    const id = req.url.split("/")[2];
+    const name = req.body.name;
+
+    users.map((usuario) => {
+      if (usuario.id == id) {
+        usuario.name = name;
+      }
+    });
+
+    res.writeHead(201, { "Content-Type": "Application/json" });
+    res.write(
+      JSON.stringify({
+        success: users,
+      })
+    );
+
+    return res.end();
   }
 }
 
