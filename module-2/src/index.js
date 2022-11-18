@@ -26,15 +26,12 @@ const server = createServer((req, res) => {
   let id = null;
   if (splitEndpoint.length > 1) {
     pathname = `/${splitEndpoint[0]}/:id`;
-    console.log("path", pathname);
     id = splitEndpoint[1];
   }
   const method = req.method; // GET POST DELETE PUT
-  console.log(pathname);
   const route = routes.find(
     (item) => item.endpoint === pathname && item.method === method
   );
-  console.log(route);
   if (route) {
     if (["POST", "PUT", "PATCH"].includes(route.method)) {
       return bodyParser(req, () => route.handler(req, res));

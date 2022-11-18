@@ -27,7 +27,6 @@ class UserService {
   getOne(req, res) {
     const id = req.url.split("/")[2];
     const user = users.find((item) => item.id == id);
-    console.log(user);
     if (user) {
       res.writeHead(200, { "Content-Type": "Application/json" });
       res.write(JSON.stringify(user));
@@ -49,8 +48,12 @@ class UserService {
 
     var id = parseInt(req.url.split("/")[2]);
     const name = req.body.name;
-    
-    users[id-1].name = name
+
+    users.map(function(user) {
+      if(user.id == id){
+        user.name = name
+      }
+    })
 
     res.writeHead(201, { "Content-Type": "Application/json" });
     res.write(
@@ -63,16 +66,21 @@ class UserService {
   }
 
   delete(req, res) {
-    var id = parseInt(req.url.split("/")[2]);
+    const id = parseInt(req.url.split("/")[2]);
     if(!(users.find((item) => item.id == id))){
       res.writeHead(404, { "Content-Type": "text/html" });
-      console.log("aquiiiii");
       res.write("<h1> Not Found </h1>");
       return res.end();
     }
 
-    var id = parseInt(req.url.split("/")[2]);
-    users.splice((id-1), 1)
+    
+    users.map((user, index) => {
+      if(user.id == id){
+        users.splice((index), 1)
+        console.log("User deleted with successful");
+      }
+      
+    })
 
     res.writeHead(204);
 
