@@ -21,6 +21,11 @@ const routes = [
     method: "PUT",
     handler: UserService.put,
   },
+  {
+    endpoint: "/users/:id",
+    method: "DELETE",
+    handler: UserService.delete,
+  },
 ];
 
 export default routes;
